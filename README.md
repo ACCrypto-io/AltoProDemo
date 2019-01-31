@@ -1,4 +1,3 @@
-![](https://accrypto.io/images/logo.png =250x250)
 # ACCryoto Data Demo
 
 ACC develops data-tools for quantitative and fundamental financial institutions working in Cryptocurrency market investment and risk management. With wide technological knowledge and hands-on experience in the Cryptocurrency space, we tackle the market’s biggest challenges using alternative and traditional data-sets, deep blockchain-layer research and advanced artificial intelligence algorithms.
