@@ -1,14 +1,15 @@
 # ACCrypto Data Demo
 
 ACC develops data-tools for quantitative and fundamental financial institutions working in Cryptocurrency market investment and risk management. With wide technological knowledge and hands-on experience in the Cryptocurrency space, we tackle the market’s biggest challenges using alternative and traditional data-sets, deep blockchain-layer research and advanced artificial intelligence algorithms.
+
 The goal of the demo is to grant a basic understanding on the structure of Alto's PRO data-sets and a glimpse to the endless information and use-cases hidden in them.
 
-### Whats inside the Data folder?
+### What is inside the Data folder?
 * The file btc-price-change-7days.csv: This file contain the maximum/minimum price change in 7 days (168 hours) for every hour. Example: for created_utc 1455145200 (February 10, 2016 11:00:00 PM) the maximum price change for BTC in the next 7 days is 10.179% while the minimum price change is -1.2609%.
 * The file BTC-Samples.csv.gz: This file is the ACC data sample for Bitcoin and should be download from https://ACCrypto.io.
 
 ### Program steps
-* Loading ACC data
+* Loading ACC data.
 * Smooth the data for sliding window (window size is 24, can be changed from Utilities/Consts.py).
 * Creating random variables for comparison, normalize and calculating Pearson correlation.
 * Normalize ACC data and calculating the Pearson correlation.
