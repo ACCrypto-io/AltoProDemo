@@ -87,6 +87,9 @@ def start_run():
         pbar.update()
 
     # Use multiprocessing to analyze correction between price change and ACC Features
+    print("Start pearson corr and normalize data")
+    # Use sleep to pretty print logs
+    time.sleep(1)
     with multiprocessing.Pool(multiprocessing.cpu_count() // 2) as p:
         res_func = [p.apply_async(score_function, args=(df[feature_name],
                                                         df_btc_price_change[Consts.BTC_PRICE_CHANGE_MAX_NAME],
@@ -105,10 +108,21 @@ def start_run():
 
     # Use sleep to pretty print logs
     time.sleep(1)
-    print('Random correlation results')
+    print()
+    print_sep()
+    print('Random Pearson correlation results')
+    print_sep()
     print_best_corr(rand_scores_df)
-    print('ACC Data correlation results')
+    time.sleep(3)
+    print()
+    print_sep()
+    print('ACC Data Pearson correlation results')
+    print_sep()
     print_best_corr(corr_df)
+
+
+def print_sep():
+    print('-' * 40)
 
 
 def print_best_corr(df):
@@ -120,8 +134,9 @@ def print_best_corr(df):
     for column_print in [Consts.CORR_RES_MAX_CHANGE, Consts.CORR_RES_MIN_CHANGE]:
         df['abs_req'] = np.abs(df[column_print])
         df.sort_values('abs_req', inplace=True, ascending=False)
-        print("Showing best {}".format(column_print))
-        print(df[[Consts.FEATURE_NAME_COLUMN, column_print]].head(20))
+        print("#------------------------------ {} ------------------------------#\n".format(column_print))
+        print(df[[Consts.FEATURE_NAME_COLUMN, column_print]].head(10))
+        print()
 
 
 if __name__ == "__main__":
