@@ -33,8 +33,8 @@ Install and create python3.6 virtual environment
 
 ```sh
 $ sudo apt install python3.6-venv;
-$ python3.6 -m venv env-acc-data-demo;
-$ source env-acc-data-demo;
+$ python3.6 -m venv .env-alto-pro-demo;
+$ source .env-alto-pro-demo/bin/activate;
 $ python3.6 -m pip install -r requirements.txt;
 ```
 
