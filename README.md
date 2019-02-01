@@ -41,7 +41,7 @@ $ python3.6 -m pip install -r requirements.txt;
 Download the data from https://ACCrypto.io and move it into the Data folder.
 Finally run the following command to show Pearson correlation between Alto Pro data to BTC price change (the project also create random variables for comparison).
 ```sh
-$ python3.6 StartAnalyze
+$ python3.6 StartAnalyze.py
 ```
 
 ##### For inquiries contact us at inquiries@accrypto.io.
