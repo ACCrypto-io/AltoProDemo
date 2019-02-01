@@ -46,7 +46,7 @@ def start_run():
     The main function that compute
     :return:
     """
-
+    print("Loading Data")
     # Load the features
     df = pd.read_csv(Consts.ACC_DATA_PATH, compression='gzip').set_index([Consts.COIN_SYMBOL_COLUMN, Consts.TIME_COLUMN])
     df.drop('Date UTC', axis=1, inplace=True)
@@ -66,6 +66,7 @@ def start_run():
     print("Total number of hours {}".format(df.shape[0]))
 
     # Compare ACC Data with random samples
+    print("Create random samples and calculating Pearson corr and normalize the data")
     rand_scores = []
     num_of_digits = len(str(df.shape[1]))
     for i in range(df.shape[1]):
@@ -79,29 +80,14 @@ def start_run():
         rand_scores.append(score_rand_test)
     rand_scores_df = pd.DataFrame(rand_scores)
 
-    # Set progress bar
-    pbar = tqdm(total=df.shape[1])
-
-    # Progress bar callback
-    def print_progress(val):
-        pbar.update()
-
-    # Use multiprocessing to analyze correction between price change and ACC Features
-    print("Start pearson corr and normalize data")
-    # Use sleep to pretty print logs
-    time.sleep(1)
-    with multiprocessing.Pool(multiprocessing.cpu_count() // 2) as p:
-        res_func = [p.apply_async(score_function, args=(df[feature_name],
-                                                        df_btc_price_change[Consts.BTC_PRICE_CHANGE_MAX_NAME],
-                                                        df_btc_price_change[Consts.BTC_PRICE_CHANGE_MIN_NAME],
-                                                        feature_name
-                                                        ),
-                                  callback=print_progress) for feature_name in df.columns.tolist()]
-
-        score_results_for_each_feature = [func_res.get() for func_res in res_func]
-
-    # Close the progress bar
-    pbar.close()
+    print("Start calculating Pearson corr and normalize the data")
+    score_results_for_each_feature = []
+    for feature_name in df.columns.tolist():
+        feature_score = score_function(df[feature_name],
+                                       df_btc_price_change[Consts.BTC_PRICE_CHANGE_MAX_NAME],
+                                       df_btc_price_change[Consts.BTC_PRICE_CHANGE_MIN_NAME],
+                                       feature_name)
+        score_results_for_each_feature.append(feature_score)
 
     # Load results to DataFrame
     corr_df = pd.DataFrame(score_results_for_each_feature)
@@ -109,20 +95,22 @@ def start_run():
     # Use sleep to pretty print logs
     time.sleep(1)
     print()
-    print_sep()
-    print('Random Pearson correlation results')
-    print_sep()
+    print_info_str = 'Random Pearson correlation results'
+    print_sep(len(print_info_str))
+    print(print_info_str)
+    print_sep(len(print_info_str))
     print_best_corr(rand_scores_df)
     time.sleep(3)
     print()
-    print_sep()
-    print('ACC Data Pearson correlation results')
-    print_sep()
+    print_info_str = 'ACC Data Pearson correlation results'
+    print_sep(len(print_info_str))
+    print(print_info_str)
+    print_sep(len(print_info_str))
     print_best_corr(corr_df)
 
 
-def print_sep():
-    print('-' * 40)
+def print_sep(sep_len=40):
+    print('-' * sep_len)
 
 
 def print_best_corr(df):
