@@ -1,6 +1,6 @@
 # Alto Pro Demo
 
-ACC develops data-tools for quantitative and fundamental financial institutions working in Cryptocurrency market investment and risk management. With wide technological knowledge and hands-on experience in the Cryptocurrency space, we tackle the market’s biggest challenges using alternative and traditional data-sets, deep blockchain-layer research and advanced artificial intelligence algorithms.
+ACC develops data-tools for financial institutions working in Cryptocurrency market investment and risk management.
 
 The goal of the demo is to grant a basic understanding on the structure of Alto's Pro data-sets and a glimpse to the endless information and use-cases hidden in them.
 
