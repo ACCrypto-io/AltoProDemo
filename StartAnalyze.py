@@ -49,7 +49,8 @@ def start_run():
     print("Loading Data")
     # Load the features
     df = pd.read_csv(Consts.ACC_DATA_PATH, compression='gzip').set_index([Consts.COIN_SYMBOL_COLUMN, Consts.TIME_COLUMN])
-    df.drop('Date UTC', axis=1, inplace=True)
+    if 'Date UTC' in df.columns:
+        df.drop('Date UTC', axis=1, inplace=True)
     df.sort_index(inplace=True)
 
     # Smooth the data with sliding window algorithm
